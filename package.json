@@ -1,7 +1,9 @@
 {
   "name": "react-native-dark-mode",
   "version": "0.0.1",
-  "private": true,
+  "description": "An Easy way to implement dark mode in your react native app",
+  "author": "Balveer Dhanoriya",
+  "main": "src/index.ts",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
