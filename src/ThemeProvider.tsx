@@ -5,24 +5,20 @@ import {dark, light} from './Colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {DEVICE_THEME, THEME_MODE_DARK, THEME_MODE_LIGHT} from './constants';
 import {ThemeContext} from './context';
-import {Theme} from './types';
+import {ThemeProviderProps} from './types';
 
-type Props = {
-  theme?: Theme;
-  children?: React.ReactNode;
-  onReady?: () => void;
-};
+const ThemeProvider = ({children}: ThemeProviderProps) => {
+  const colorScheme = useColorScheme();
 
-const ThemeProvider = ({children}: Props) => {
   const [theme, setTheme] = React.useState(light);
   const [themeMode, setThemeMode] = React.useState(THEME_MODE_LIGHT);
-  const colorScheme = useColorScheme();
 
   React.useEffect(() => {
     AsyncStorage.getItem('theme').then(newTheme => {
-      onChangeTheme(newTheme, colorScheme);
+      onChangeTheme(newTheme ?? 'light', colorScheme);
     });
   }, [colorScheme]);
+
   const changeThemeMemo = React.useMemo(
     () => ({
       changeTheme: async (newTheme: string) => {
@@ -33,20 +29,17 @@ const ThemeProvider = ({children}: Props) => {
     [],
   );
   const onChangeTheme = (
-    newTheme: string | null,
+    newTheme: string,
     deviceColorScheme: string | null | undefined,
   ) => {
-    if (newTheme === DEVICE_THEME) {
-      setThemeMode(DEVICE_THEME);
-      setTheme(deviceColorScheme === 'dark' ? dark : light);
-    } else if (newTheme === THEME_MODE_DARK) {
-      setThemeMode(THEME_MODE_DARK);
-      setTheme(dark);
-    } else {
-      setThemeMode(THEME_MODE_LIGHT);
-      setTheme(light);
-    }
+    setThemeMode(newTheme);
     AsyncStorage.setItem('theme', newTheme ?? '');
+
+    if (newTheme === DEVICE_THEME) {
+      setTheme(deviceColorScheme === 'dark' ? dark : light);
+    } else {
+      setTheme(newTheme === THEME_MODE_DARK ? dark : light);
+    }
   };
 
   return (

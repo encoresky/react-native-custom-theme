@@ -5,7 +5,7 @@ import Home from './Home';
 const App = () => {
   return (
     <ThemeProvider>
-      <Home />;
+      <Home />
     </ThemeProvider>
   );
 };
