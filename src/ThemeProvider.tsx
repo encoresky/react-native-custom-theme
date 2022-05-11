@@ -23,7 +23,6 @@ const ThemeProvider = ({children}: Props) => {
       onChangeTheme(newTheme, colorScheme);
     });
   }, [colorScheme]);
-
   const changeThemeMemo = React.useMemo(
     () => ({
       changeTheme: async (newTheme: string) => {
@@ -33,7 +32,6 @@ const ThemeProvider = ({children}: Props) => {
     }),
     [],
   );
-
   const onChangeTheme = (
     newTheme: string | null,
     deviceColorScheme: string | null | undefined,
