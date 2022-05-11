@@ -24,5 +24,5 @@ export type GlobalContent = {
   themeMode: string;
   theme: Theme;
   isDarkTheme: boolean;
-  changeThemeMemo: any;
+  setTheme: (theme: string) => void;
 };

@@ -10,7 +10,7 @@ const contextDefaultValues: GlobalContent = {
   themeMode: 'light',
   theme: light,
   isDarkTheme: false,
-  changeThemeMemo: null,
+  setTheme: _ => {},
 };
 
 /**

@@ -5,7 +5,7 @@ import {dark, light} from './Colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {DEVICE_THEME, THEME_MODE_DARK, THEME_MODE_LIGHT} from './constants';
 import {ThemeContext} from './context';
-import {ThemeProviderProps} from './types';
+import {GlobalContent, ThemeProviderProps} from './types';
 
 const ThemeProvider = ({children}: ThemeProviderProps) => {
   const colorScheme = useColorScheme();
@@ -42,14 +42,15 @@ const ThemeProvider = ({children}: ThemeProviderProps) => {
     }
   };
 
+  const globalContent: GlobalContent = {
+    themeMode: themeMode,
+    theme: theme,
+    setTheme: changeThemeMemo.changeTheme,
+    isDarkTheme: theme.mode === THEME_MODE_DARK,
+  };
+
   return (
-    <ThemeContext.Provider
-      value={{
-        themeMode,
-        theme,
-        changeThemeMemo,
-        isDarkTheme: theme.mode === THEME_MODE_DARK,
-      }}>
+    <ThemeContext.Provider value={globalContent}>
       {children}
     </ThemeContext.Provider>
   );
