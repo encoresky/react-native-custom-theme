@@ -3,9 +3,9 @@ import {Appearance, useColorScheme} from 'react-native';
 import {dark, light} from './Colors';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {DEVICE_THEME, THEME_MODE_DARK, THEME_MODE_LIGHT} from './constants';
+import {ThemeModes} from './constants';
 import {ThemeContext} from './context';
-import {GlobalContent, ThemeMode, ThemeProviderProps} from './types';
+import {GlobalContent, Theme, ThemeProviderProps} from './types';
 
 const ThemeProvider = ({children}: ThemeProviderProps) => {
   /**
@@ -17,20 +17,22 @@ const ThemeProvider = ({children}: ThemeProviderProps) => {
    * @theme object contain color values for selected theme. it also have a additional parameter 'mode' which
    * determine if selected theme is light or dark.
    */
-  const [theme, setTheme] = React.useState(light);
+  const [theme, setTheme] = React.useState<Theme>(light);
 
   /**
    * @themeMode is type of mode which is selected for applying theme. it can be light, dark or device theme.
    * if device theme is selected then it will apply light or dark theme based on device theme.
    */
-  const [themeMode, setThemeMode] = React.useState(THEME_MODE_LIGHT);
+  const [themeMode, setThemeMode] = React.useState<ThemeModes>(
+    ThemeModes.LIGHT,
+  );
 
   /**
    * Hook triggered every time device theme changes
    */
   React.useEffect(() => {
     AsyncStorage.getItem('theme').then(newTheme => {
-      const t = newTheme as ThemeMode;
+      const t = newTheme as ThemeModes;
 
       onChangeTheme(t ?? 'light', colorScheme);
     });
@@ -41,7 +43,7 @@ const ThemeProvider = ({children}: ThemeProviderProps) => {
    */
   const changeThemeMemo = React.useMemo(
     () => ({
-      changeTheme: async (newTheme: ThemeMode) => {
+      changeTheme: async (newTheme: ThemeModes) => {
         const deviceColorScheme = Appearance.getColorScheme();
         onChangeTheme(newTheme, deviceColorScheme);
       },
@@ -55,16 +57,16 @@ const ThemeProvider = ({children}: ThemeProviderProps) => {
    * @param deviceColorScheme device color scheme
    */
   const onChangeTheme = (
-    newTheme: ThemeMode,
+    newTheme: ThemeModes,
     deviceColorScheme: string | null | undefined,
   ) => {
     setThemeMode(newTheme);
     AsyncStorage.setItem('theme', newTheme ?? '');
 
-    if (newTheme === DEVICE_THEME) {
+    if (newTheme === ThemeModes.DEVICE_THEME) {
       setTheme(deviceColorScheme === 'dark' ? dark : light);
     } else {
-      setTheme(newTheme === THEME_MODE_DARK ? dark : light);
+      setTheme(newTheme === ThemeModes.DARK ? dark : light);
     }
   };
 
@@ -75,7 +77,7 @@ const ThemeProvider = ({children}: ThemeProviderProps) => {
     themeMode: themeMode,
     theme: theme,
     setTheme: changeThemeMemo.changeTheme,
-    isDarkTheme: theme.mode === THEME_MODE_DARK,
+    isDarkTheme: theme.mode === ThemeModes.DARK,
   };
 
   /**

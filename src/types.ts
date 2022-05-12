@@ -1,4 +1,4 @@
-export type ThemeMode = 'light' | 'dark' | 'device theme';
+import {ThemeModes} from './constants';
 
 /**
  * This is the basic object which contain theme variable.
@@ -17,7 +17,8 @@ export type Theme = {
  * rendered within it. Children prop contain the app UI.
  */
 export type ThemeProviderProps = {
-  theme?: Theme;
+  lightTheme?: Theme;
+  darkTheme?: Theme;
   children?: React.ReactNode;
   onReady?: () => void;
 };
@@ -36,5 +37,5 @@ export type GlobalContent = {
   themeMode: string;
   theme: Theme;
   isDarkTheme: boolean;
-  setTheme: (theme: ThemeMode) => void;
+  setTheme: (theme: ThemeModes) => void;
 };
