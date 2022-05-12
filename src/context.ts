@@ -1,5 +1,4 @@
 import React from 'react';
-import {light} from './Colors';
 import {GlobalContent} from './types';
 
 /**
@@ -8,7 +7,7 @@ import {GlobalContent} from './types';
  */
 const contextDefaultValues: GlobalContent = {
   themeMode: 'light',
-  theme: light,
+  theme: {mode: 'light'},
   isDarkTheme: false,
   setTheme: _ => {},
 };
