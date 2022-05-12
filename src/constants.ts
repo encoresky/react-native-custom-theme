@@ -7,6 +7,8 @@
  * 4. Device theme mode only work in device which support dark mode
  */
 
-export const THEME_MODE_LIGHT = 'light';
-export const THEME_MODE_DARK = 'dark';
-export const DEVICE_THEME = 'device theme';
+export enum ThemeModes {
+  LIGHT = 'light',
+  DARK = 'dark',
+  DEVICE_THEME = 'device theme',
+}
