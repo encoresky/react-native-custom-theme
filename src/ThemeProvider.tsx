@@ -5,7 +5,7 @@ import {dark, light} from './Colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {DEVICE_THEME, THEME_MODE_DARK, THEME_MODE_LIGHT} from './constants';
 import {ThemeContext} from './context';
-import {GlobalContent, ThemeProviderProps} from './types';
+import {GlobalContent, ThemeMode, ThemeProviderProps} from './types';
 
 const ThemeProvider = ({children}: ThemeProviderProps) => {
   const colorScheme = useColorScheme();
@@ -15,13 +15,15 @@ const ThemeProvider = ({children}: ThemeProviderProps) => {
 
   React.useEffect(() => {
     AsyncStorage.getItem('theme').then(newTheme => {
-      onChangeTheme(newTheme ?? 'light', colorScheme);
+      const t = newTheme as ThemeMode;
+
+      onChangeTheme(t ?? 'light', colorScheme);
     });
   }, [colorScheme]);
 
   const changeThemeMemo = React.useMemo(
     () => ({
-      changeTheme: async (newTheme: string) => {
+      changeTheme: async (newTheme: ThemeMode) => {
         const deviceColorScheme = Appearance.getColorScheme();
         onChangeTheme(newTheme, deviceColorScheme);
       },
@@ -29,7 +31,7 @@ const ThemeProvider = ({children}: ThemeProviderProps) => {
     [],
   );
   const onChangeTheme = (
-    newTheme: string,
+    newTheme: ThemeMode,
     deviceColorScheme: string | null | undefined,
   ) => {
     setThemeMode(newTheme);

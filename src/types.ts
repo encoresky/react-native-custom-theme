@@ -1,3 +1,5 @@
+export type ThemeMode = 'light' | 'dark' | 'device theme';
+
 /**
  * This is the basic object which contain theme variable.
  * mode store if theme is dark or light.
@@ -20,9 +22,19 @@ export type ThemeProviderProps = {
   onReady?: () => void;
 };
 
+/**
+ * This data is exposed to external project. user can only use it.
+ * @themeMode is string value representing currently selected theme.
+ * it must be one of light, dark and device theme
+ * @theme it contain color values for current theme, if dark theme is selected then
+ * it contain dark theme color and same in case of light theme.
+ * @isDarkTheme it is a special flag to identify if current theme is light or dark.
+ * @setTheme It is a function which we use to set new theme type. We have to pass
+ * light, dark or device theme as param.
+ */
 export type GlobalContent = {
   themeMode: string;
   theme: Theme;
   isDarkTheme: boolean;
-  setTheme: (theme: string) => void;
+  setTheme: (theme: ThemeMode) => void;
 };
