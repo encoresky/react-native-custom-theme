@@ -78,7 +78,7 @@ const Home = () => {
 }
 ```
 
-To change theme use **setTheme** method from **useTHeme** hook
+To change theme use **setTheme** method from **useTheme** hook
 ```tsx
 -- other imports ---
 import {ThemeModes, useTheme} from 'react-native-custom-theme';
