@@ -1,1 +1,1 @@
-##react-native-dark-mode
+##react-native-custom-theme
