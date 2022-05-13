@@ -18,7 +18,7 @@ The solution is implemented in JavaScript so no native module linking is require
 ## How to use
 
 Create theme object for light and dark theme ```Colors.js```
-```
+```ts
 import {Theme} from 'react-native-custom-theme';
 export const light: Theme = {
   mode: 'light',
@@ -37,7 +37,7 @@ export const dark: Theme = {
 ```
 
 Wrap your app within ThemeProvider. ThemeProvider require light and dark theme objects as props
-```
+```tsx
 import React from 'react';
 import ThemeProvider from 'react-native-custom-theme';
 import {dark, light} from './Colors';
@@ -53,7 +53,6 @@ const App = () => {
 
 export default App;
 ```
-
 
 ## Authors
 - [Balveer Dhanoriya](https://github.com/estbalveer)
