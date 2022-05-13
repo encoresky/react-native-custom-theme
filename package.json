@@ -1,6 +1,6 @@
 {
   "name": "react-native-custom-theme",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An Easy way to implement dark mode in your react native app",
   "author": "Balveer Dhanoriya",
   "main": "src/index.ts",
