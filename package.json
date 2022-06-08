@@ -1,9 +1,31 @@
 {
   "name": "react-native-custom-theme",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An Easy way to implement dark mode in your react native app",
   "author": "Balveer Dhanoriya",
   "main": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/encoresky/react-native-custom-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/encoresky/react-native-custom-theme/issues"
+  },
+  "homepage": "https://github.com/encoresky/react-native-custom-theme#readme",
+  "keywords": [
+    "react-native",
+    "theme",
+    "custom",
+    "custom-theme",
+    "dark",
+    "dark-mode",
+    "dark-theme",
+    "mode",
+    "appearance",
+    "android",
+    "ios"
+  ],
+  "license": "MIT",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
