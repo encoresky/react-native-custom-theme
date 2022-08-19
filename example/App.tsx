@@ -1,5 +1,5 @@
 import React from 'react';
-import ThemeProvider, {Theme} from 'react-native-dark-mode';
+import ThemeProvider from '../';
 import Home from './Home';
 
 const App = () => {
